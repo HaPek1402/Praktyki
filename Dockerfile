@@ -2,6 +2,7 @@ FROM ubuntu:18.04
 
 RUN apt-get update 
 RUN apt-get install -y curl gnupg2 build-essential sudo
+RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 RUN ["apt-get", "-y", "install", "vim"]
 
 RUN useradd -rm -d /home/hosting -s /bin/bash -g root -G sudo -u 1001 hosting
@@ -19,5 +20,9 @@ RUN /bin/bash -l -c "echo 'source ~/.rvm/scripts/rvm' >> ~/.bashrc"
 RUN /bin/bash -l -c "source ~/.bashrc"
 RUN /bin/bash -l -c "rvm install "ruby-3.0.2""
 RUN /bin/bash -l -c "rvm use 3.0.2"
+COPY Gemfile /home/hosting/projekt
+COPY Gemfile.lock /home/hosting/projekt
+RUN /bin/bash -l -c "gem install rails -v 7.0.4"
+
 
 EXPOSE 3000
