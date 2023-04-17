@@ -1,6 +1,6 @@
 require "nokogiri"
 require_relative 'scraper.rb'
-require_relative 'otomotoproduct.rb'
+require_relative 'otomoto_product.rb'
 
 class OtomotoScraper
 	include Scraper
