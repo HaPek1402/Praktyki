@@ -1,4 +1,4 @@
-require_relative 'pdfgenerator.rb'
+require_relative 'pdf_generator.rb'
 require_relative 'configuration.rb'
 require_relative 'otomoto_scraper.rb'
 
