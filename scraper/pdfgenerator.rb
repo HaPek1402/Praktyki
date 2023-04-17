@@ -55,6 +55,3 @@ class PDFGenerator
     end
   end
 end
-
-pdf_generator = PDFGenerator.new('output.csv', 'your_pdf_file.pdf')
-pdf_generator.generate_pdf
