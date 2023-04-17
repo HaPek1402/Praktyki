@@ -1,9 +1,9 @@
 require "httparty" 
 require "nokogiri"
 require "open-uri"
-require "parallel"
+require "prawn"
+require "yaml"
 
-# defining a class to store the scraped data
 class OtomotoProduct
     attr_reader :url, :obraz, :nazwa, :cena, :tabela
 	def initialize(url, obraz, nazwa, cena, tabela)
@@ -25,7 +25,6 @@ class Scraper
 				"User-Agent" => "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36" 
 			}, 
 		})
-		# parsing the HTML document returned by the server 
 		@document = Nokogiri::HTML(response.body)
 	end
 end
@@ -35,9 +34,7 @@ class OtomotoScraper < Scraper
 		html_products = @document.css("main").css("article")
 		@otomoto_products = []
 		html_products.each do |html_product| 			
-			# storing the scraped data in a OtomotoProduct object 
 			otomoto_product = scrapeProduct(html_product) 
-			# adding the OtomotoProduct to the list of scraped objects 
 			@otomoto_products.push(otomoto_product) 
 		end
 	end
@@ -97,5 +94,16 @@ class OtomotoScraper < Scraper
 	end
 end
 
-scrp = OtomotoScraper.new("https://www.otomoto.pl/osobowe")
+class Configuration
+	def initialize(configFile)
+		@config = YAML.load_file(configFile)
+	end
+	def to_s
+		"https://www.otomoto.pl/osobowe/#{@config['otomoto']['marka']}/od-#{@config['otomoto']['minrok']}?search%5Bfilter_float_year%3Ato%5D=#{@config['otomoto']['maxrok']}"
+	end
+end
+
+conf = Configuration.new("config.yml")
+
+scrp = OtomotoScraper.new(conf.to_s)
 scrp.scrapeProductsToCSV
