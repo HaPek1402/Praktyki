@@ -1,6 +1,6 @@
 require_relative 'pdfgenerator.rb'
 require_relative 'configuration.rb'
-require_relative 'otomotoscraper.rb'
+require_relative 'otomoto_scraper.rb'
 
 conf = Configuration.new("config.yml")
 
