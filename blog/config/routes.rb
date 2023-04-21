@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     end
     
     get 'articles/:id', to: 'articles#show', as: 'admin_article'
-    get 'articles/:id/comments', to: 'comments#index', as: 'article_comments'
+    get 'articles/:id/comments', to: 'comments#index', as: 'admin_article_comments'
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html  
