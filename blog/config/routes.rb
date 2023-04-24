@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     
     get 'articles/:id', to: 'articles#show', as: 'admin_article'
     get 'articles/:id/comments', to: 'comments#index', as: 'admin_article_comments'
-    get 'articles/:id/generate_pdf', to: 'articles#generate_pdf', as: 'generate_pdf'
+    get 'articles/:id/generate_pdf', to: 'articles#generate_pdf', as: 'generate_pdf'   
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html  
