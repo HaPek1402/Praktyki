@@ -1,5 +1,10 @@
 class CommentsController < ApplicationController
-    before_action :authenticate_user!
+    before_action :authenticate_user!, except: :index
+    def index
+      @article = Article.find(params[:article_id])
+      @comments = @article.comments.paginate(page: params[:page], per_page: 10)
+    end
+    
     def create
         @article = Article.find(params[:article_id])
         @comment = @article.comments.create(comment_params)
