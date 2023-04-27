@@ -2,12 +2,14 @@
 <h2>Our blog has <%= Article.public_count %> articles and counting!</h2>
 <ul>
     <% @articles.each do |article| %>
-        <% unless article.archived? %>
             <li>
-                <%= link_to article.title, article_path(article) %>
+                <%= link_to article.title, admin_article_path(article) %>
+                <% if article.archived?  %>
+                  <p>Archived<p>
+                <% end%>
             </li>
-        <% end %>
     <% end %>
 </ul>
-
+<%= will_paginate @articles %>
+<%= link_to "New Article", new_admin_article_path%><br>
 <%= render 'shared/sign' %>
