@@ -10,6 +10,6 @@
             </li>
     <% end %>
 </ul>
-
+<%= will_paginate @articles %>
 <%= link_to "New Article", new_admin_article_path%><br>
 <%= render 'shared/sign' %>
