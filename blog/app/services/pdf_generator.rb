@@ -20,6 +20,7 @@ class PdfGenerator
             generate_new
         end
         @file_path
+        # Check if last pdf generated at is nil or if there were any changes
     end
 
     def generate_new   

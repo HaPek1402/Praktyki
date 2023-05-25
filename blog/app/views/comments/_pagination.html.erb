@@ -1,0 +1,5 @@
+<% if @comments.total_pages > 1 %>
+  <div class="pagination">
+    <%= will_paginate @comments, param_name: 'comments_page' %>
+  </div>
+<% end %>

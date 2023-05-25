@@ -1,15 +1,19 @@
-<h1>Articles</h1>
+<h1 class="mb-4">Articles</h1>
 <h2>Our blog has <%= Article.public_count %> articles and counting!</h2>
-<ul>
-    <% @articles.each do |article| %>
-            <li>
-                <%= link_to article.title, admin_article_path(article) %>
-                <% if article.archived?  %>
-                  <p>Archived<p>
-                <% end%>
-            </li>
-    <% end %>
-</ul>
-<%= will_paginate @articles %>
-<%= link_to "New Article", new_admin_article_path%><br>
+
+<div class="list-group mb-4">
+  <% @articles.each do |article| %>
+    <a href="<%= admin_article_path(article) %>" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+      <%= article.title %>
+      <% if article.archived?  %>
+        <span class="badge badge-danger badge-pill">Archived</span>
+      <% end %>
+    </a>
+  <% end %>
+</div>
+
+<%= will_paginate @articles, class: "pagination justify-content-center" %>
+
+<%= link_to "New Article", new_admin_article_path, class: "btn btn-primary mb-4" %>
+
 <%= render 'shared/sign' %>

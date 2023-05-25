@@ -1,20 +1,43 @@
-<h1><%= @article.title %></h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <h1><%= @article.title %></h1>
 
-<p><%= @article.body %></p>
+      <p><%= @article.body %></p>
 
-<ul>
-  <li><%= link_to "Edit", edit_admin_article_path(@article) %></li>
-  <li><%= link_to "Destroy", admin_article_path(@article), data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "Are you sure?"
-                  } %></li>
-</ul>
+      <%= link_to "Edit", edit_admin_article_path(@article), class: "btn btn-primary" %>
+      <%= link_to "Destroy", admin_article_path(@article), data: {
+                      turbo_method: :delete,
+                      turbo_confirm: "Are you sure?"
+                    }, method: :delete, class: "btn btn-danger" %>
 
-<h2>Comments</h2>
-<%= link_to "Comments", admin_article_comments_path(@article) %>
-<%= render @article.comments %>
 
-<h2>Add a comment:</h2>
-<%= render 'comments/form' %>
-<%= link_to "Generate PDF", admin_generate_pdf_path(@article) %><br>
-<%= render 'shared/sign' %>
+      <div class="mt-5">
+        <%= link_to "Generate PDF", admin_generate_pdf_path(format: :pdf), class: "btn btn-primary" %>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <h2>Comments</h2>
+        </div>
+        <div class="card-body">
+          <%= render @comments %>
+          <%= will_paginate @comments %>
+        </div>
+      </div>
+      
+      <div class="card mt-3">
+        <div class="card-header">
+          <h2>Add a comment:</h2>
+        </div>
+        <div class="card-body">
+          <%= render 'comments/form' %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%= render 'shared/sign' %>
+</div>
