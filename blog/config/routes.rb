@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :users
-
   devise_scope :user do  
-    get '/users/sign_out' => 'devise/sessions#destroy'     
+    post 'api/v1/login', to: 'users/sessions#create'
+    get 'api/v1/logout', to: 'users/sessions#destroy'  
   end
+
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
 
   # Defines the root path route ("/")
   root "articles#index"
